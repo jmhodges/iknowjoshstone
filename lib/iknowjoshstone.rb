@@ -20,11 +20,18 @@ class Iknowjoshstone < Sinatra::Base
     end
   end
   get '/' do
+    @saved_for = params["saved_for"]
     @posts = DB[:posts].order(:created_at).limit(10)
     haml :index
   end
 
   get '/posts/new' do
     haml :new
+  end
+
+  post '/posts/create' do
+    new_post = params["post"].merge(:created_at => Time.now)
+    DB[:posts] << new_post
+    redirect "/?saved_for=#{new_post['whotheyare']}"
   end
 end

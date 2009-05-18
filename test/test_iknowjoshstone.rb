@@ -38,8 +38,8 @@ class TestIknowjoshstone < Test::Unit::TestCase
 
   def test_has_a_nice_form_page_for_adding_posts
     visit '/posts/new'
-    assert_equal 200, response_code, "new post page should respond with a 2xx like a boss"
-    form = parsed.at('form[@action="/posts/create"]')
+    assert response.ok?, "new post page should respond with a 2xx like a boss"
+    form = parsed.at('form[@action="/posts/create"][@id="new_post"]')
     assert_not_nil form
     assert_not_nil form.at('input[@name="post[whotheyare]"][@id="whotheyare"][@type="text"]')
     assert_not_nil form.at('label[@for="whotheyare"]')
@@ -49,9 +49,24 @@ class TestIknowjoshstone < Test::Unit::TestCase
   end
 
   def test_index_to_new_post
+    assert_equal [], Iknowjoshstone::DB[:posts].filter(:whotheyare => "megan").all
+    
     visit '/'
     click_link 'Do you know Josh Stone?'
+    fill_in 'whotheyare', :with => "megan"
+    fill_in 'howtheyknowhim', :with => 'not sure but i remember beats and mel'
+    submit_form 'new_post'
+    assert response.ok?, "posted just fine"
+    posts = Iknowjoshstone::DB[:posts].filter(:whotheyare => "megan").all
+    assert_equal 1, posts.size
+
+    post = posts[0]
+    assert_equal "megan", post[:whotheyare] # Obvious from the filter
+    assert_equal 'not sure but i remember beats and mel', post[:howtheyknowhim]
+    assert_in_delta Time.now, post[:created_at], 30
     
+    assert_have_selector 'div.saved'
+    assert_equal "You really know Josh, hunh, megan?", parsed.at('div.saved').content.strip
   end
   
   private
