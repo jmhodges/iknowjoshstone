@@ -8,6 +8,8 @@ end
 class Iknowjoshstone < Sinatra::Base
   VERSION = '1.0.0'
   set :app_file, __FILE__
+  enable :sessions
+
   configure do
     dbfile = here("../db/#{environment}.sqlite3")
     DB = Sequel.sqlite(dbfile)
@@ -19,10 +21,11 @@ class Iknowjoshstone < Sinatra::Base
       end
     end
   end
+
   get '/' do
-    @saved_for = params["saved_for"]
+    @saved_for = flash[:saved_for]
     @posts = DB[:posts].order(:created_at).limit(10)
-    haml :index
+    flash_haml :index
   end
 
   get '/posts/new' do
@@ -32,6 +35,18 @@ class Iknowjoshstone < Sinatra::Base
   post '/posts/create' do
     new_post = params["post"].merge(:created_at => Time.now)
     DB[:posts] << new_post
-    redirect "/?saved_for=#{new_post['whotheyare']}"
+    flash[:saved_for] = new_post['whotheyare']
+    redirect '/'
+  end
+
+  def flash
+    session[:flash] = {} if session[:flash] && session[:flash].class != Hash
+    session[:flash] ||= {}
+  end
+
+  def flash_haml(*args)
+    flashed_haml = haml(*args)
+    flash.clear
+    flashed_haml
   end
 end

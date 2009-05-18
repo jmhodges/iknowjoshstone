@@ -6,7 +6,6 @@ class TestIknowjoshstone < Test::Unit::TestCase
   end
   
   def setup
-
     Iknowjoshstone::DB[:posts].delete
     Iknowjoshstone::DB[:posts] << {:whotheyare => "melanie", :howtheyknowhim => "in short, from being fantastic", :created_at => Time.now}
     Iknowjoshstone::DB[:posts] << {:whotheyare => "jeff", :howtheyknowhim => "from passa passa reggae, via melanie", :created_at => Time.now}
@@ -65,8 +64,8 @@ class TestIknowjoshstone < Test::Unit::TestCase
     assert_equal 'not sure but i remember beats and mel', post[:howtheyknowhim]
     assert_in_delta Time.now, post[:created_at], 30
     
-    assert_have_selector 'div.saved'
-    assert_equal "You really know Josh, hunh, megan?", parsed.at('div.saved').content.strip
+    # assert_have_selector 'div.saved'
+    # assert_equal "You really know Josh, hunh, megan?", parsed.at('div.saved').content.strip
   end
   
   private
