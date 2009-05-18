@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sequel'
+require 'Haml'
 
 def here(fname)
   File.expand_path(File.dirname(__FILE__) + '/' + fname)
