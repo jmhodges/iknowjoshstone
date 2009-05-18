@@ -18,6 +18,7 @@ We know Josh Stone. Do you?
 
 * Sinatra
 * Sequel
+* Nokogiri
 
 == INSTALL:
 

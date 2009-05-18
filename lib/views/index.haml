@@ -1,0 +1,13 @@
+%h1 I Know Josh Stone
+
+%h3
+  %a{:href => '/posts/new'}
+    Do you know Josh Stone?
+
+- @posts.each do |post|
+  %div{:class => 'post'}
+    %div{:class => 'whotheyare'}
+      = post[:whotheyare]
+    %div{:class => 'howtheyknowhim'}
+      = post[:howtheyknowhim]
+  

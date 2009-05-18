@@ -1,0 +1,12 @@
+%form{:action => '/posts/create', :id => 'post_form'}
+  %label{:for => "whotheyare_text"} Who are you?
+  %input{:name => "whotheyare", :id => "whotheyare_text"}
+
+  %br/
+
+  %label{:for => "howtheyknowhim_text"} How do you know him?
+  %textarea{:name => "howtheyknowhim", :id => "howtheyknowhim_text"}
+
+  %br/
+
+  %button{:type => "submit"} Leave the evidence!
