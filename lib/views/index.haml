@@ -11,8 +11,10 @@
 
 - @posts.each do |post|
   %div{:class => 'post'}
-    %div{:class => 'whotheyare'}
-      = post[:whotheyare]
+    %div{:class => 'post-whotheyare'}
+      %strong{:class => 'whotheyare'}
+        = post[:whotheyare]
+      knows Josh:
     %div{:class => 'howtheyknowhim'}
       = post[:howtheyknowhim]
   

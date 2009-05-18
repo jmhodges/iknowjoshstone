@@ -25,8 +25,8 @@ class TestIknowjoshstone < Test::Unit::TestCase
   def test_index_displays_awesome_posts
     visit '/'
     posts = parsed / 'div.post'
-    assert_equal "melanie", posts[0].at('div.whotheyare').content.strip
-    assert_equal "jeff", posts[1].at('div.whotheyare').content.strip
+    assert_equal "melanie", posts[0].at('.whotheyare').content.strip
+    assert_equal "jeff", posts[1].at('.whotheyare').content.strip
     assert_equal "in short, from being fantastic", posts[0].at('div.howtheyknowhim').content.strip
     assert_equal "from passa passa reggae, via melanie", posts[1].at('div.howtheyknowhim').content.strip
   end
