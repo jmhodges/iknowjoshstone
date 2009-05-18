@@ -1,11 +1,11 @@
 %form{:action => '/posts/create', :id => 'post_form'}
-  %label{:for => "whotheyare_text"} Who are you?
-  %input{:name => "whotheyare", :id => "whotheyare_text"}
+  %label{:for => "whotheyare"} Who are you?
+  %input{:name => "post[whotheyare]", :type => "text", :id => "whotheyare"}
 
   %br/
 
-  %label{:for => "howtheyknowhim_text"} How do you know him?
-  %textarea{:name => "howtheyknowhim", :id => "howtheyknowhim_text"}
+  %label{:for => "howtheyknowhim"} How do you know him?
+  %textarea{:name => "post[howtheyknowhim]", :id => "howtheyknowhim"}
 
   %br/
 

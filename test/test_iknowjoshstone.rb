@@ -41,11 +41,17 @@ class TestIknowjoshstone < Test::Unit::TestCase
     assert_equal 200, response_code, "new post page should respond with a 2xx like a boss"
     form = parsed.at('form[@action="/posts/create"]')
     assert_not_nil form
-    assert_not_nil form.at('input[@name="whotheyare"][@id="whotheyare_text"]')
-    assert_not_nil form.at('label[@for="whotheyare_text"]')
-    assert_not_nil form.at('textarea[@name="howtheyknowhim"][@id="howtheyknowhim_text"]')
-    assert_not_nil form.at('label[@for="howtheyknowhim_text"]')
+    assert_not_nil form.at('input[@name="post[whotheyare]"][@id="whotheyare"][@type="text"]')
+    assert_not_nil form.at('label[@for="whotheyare"]')
+    assert_not_nil form.at('textarea[@name="post[howtheyknowhim]"][@id="howtheyknowhim"]')
+    assert_not_nil form.at('label[@for="howtheyknowhim"]')
     assert_not_nil form.at('button[@type="submit"]')
+  end
+
+  def test_index_to_new_post
+    visit '/'
+    click_link 'Do you know Josh Stone?'
+    
   end
   
   private
