@@ -9,7 +9,7 @@ end
 
 Sinatra::Base.set :environment, :test
 
-require "iknowjoshstone"
+require File.expand_path(File.dirname(__FILE__) + '/../lib/iknowjoshstone')
 
 class Test::Unit::TestCase
   include Webrat::Methods

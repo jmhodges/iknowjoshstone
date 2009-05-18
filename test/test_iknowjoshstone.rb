@@ -7,7 +7,7 @@ class TestIknowjoshstone < Test::Unit::TestCase
   
   def setup
     Iknowjoshstone::DB[:posts].delete
-    Iknowjoshstone::DB[:posts] << {:whotheyare => "melanie", :howtheyknowhim => "in short, from being fantastic", :created_at => Time.now}
+    Iknowjoshstone::DB[:posts] << {:whotheyare => "melanie", :howtheyknowhim => "in short, from being fantastic", :created_at => Time.now-20}
     Iknowjoshstone::DB[:posts] << {:whotheyare => "jeff", :howtheyknowhim => "from passa passa reggae, via melanie", :created_at => Time.now}
   end
 
@@ -24,10 +24,11 @@ class TestIknowjoshstone < Test::Unit::TestCase
   def test_index_displays_awesome_posts
     visit '/'
     posts = parsed / 'div.post'
-    assert_equal "melanie", posts[0].at('.whotheyare').content.strip
-    assert_equal "jeff", posts[1].at('.whotheyare').content.strip
-    assert_equal "in short, from being fantastic", posts[0].at('div.howtheyknowhim').content.strip
-    assert_equal "from passa passa reggae, via melanie", posts[1].at('div.howtheyknowhim').content.strip
+    assert_equal "jeff", posts[0].at('.whotheyare').content.strip
+    assert_equal "melanie", posts[1].at('.whotheyare').content.strip
+
+    assert_equal "from passa passa reggae, via melanie", posts[0].at('div.howtheyknowhim').content.strip
+    assert_equal "in short, from being fantastic", posts[1].at('div.howtheyknowhim').content.strip
   end
 
   def test_index_links_to_a_form_for_adding_a_post
