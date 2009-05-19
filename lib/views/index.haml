@@ -14,8 +14,8 @@
   %div{:class => 'post'}
     %div{:class => 'post-whotheyare'}
       %strong{:class => 'whotheyare'}
-        = post[:whotheyare]
+        = Dryopteris.whitewash post[:whotheyare]
       knows Josh:
     %div{:class => 'howtheyknowhim'}
-      = post[:howtheyknowhim]
+      = Dryopteris.whitewash post[:howtheyknowhim]
   

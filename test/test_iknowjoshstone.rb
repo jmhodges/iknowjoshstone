@@ -68,7 +68,16 @@ class TestIknowjoshstone < Test::Unit::TestCase
     # assert_have_selector 'div.saved'
     # assert_equal "You really know Josh, hunh, megan?", parsed.at('div.saved').content.strip
   end
-  
+
+  def test_sanitization
+    visit '/posts/new'
+    fill_in 'whotheyare', :with => '<p style="display:none">badguy</p>'
+    fill_in 'howtheyknowhim', :with => '<p style="display:none">this is missing</p>'
+    submit_form 'new_post'
+    visit '/'
+    assert_nil parsed.at('p[@style="display:none"]')
+  end
+
   private
   def parsed
     Nokogiri::HTML.parse(response_body)
