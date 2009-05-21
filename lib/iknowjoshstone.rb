@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require 'sequel'
-require 'Haml'
+require 'haml'
 require 'dryopteris'
 
 def here(fname)
