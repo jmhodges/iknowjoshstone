@@ -1,4 +1,7 @@
 !!!
+%script{:src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'}
+%script{:src => '/javascript/application.js'}
+
 - if @saved_for
   %div.saved
     = "You really know Josh, hunh, #{@saved_for}?"
@@ -7,15 +10,16 @@
 %h1 I Know Josh Stone
 
 %h3
-  %a{:href => '/posts/new'}
+  %a{:href => '/posts/new', :id => 'form_link'}
     Do you know Josh Stone?
+
+= haml :form, :layout => false, :locals => {:hidden => true}
 
 - @posts.each do |post|
   %div{:class => 'post'}
     %div{:class => 'post-whotheyare'}
       %strong{:class => 'whotheyare'}
-        = Dryopteris.whitewash post[:whotheyare]
+        = post[:whotheyare]
       knows Josh:
     %div{:class => 'howtheyknowhim'}
-      = Dryopteris.whitewash post[:howtheyknowhim]
-  
+      = post[:howtheyknowhim]

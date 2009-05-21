@@ -17,6 +17,7 @@ class Iknowjoshstone < Sinatra::Base
     DB = Sequel.sqlite(dbfile)
     unless DB.table_exists?(:posts)
       DB.create_table(:posts) do
+        primary_key :id
         String :whotheyare
         String :howtheyknowhim
         DateTime :created_at
@@ -35,9 +36,12 @@ class Iknowjoshstone < Sinatra::Base
   end
 
   post '/posts/create' do
-    new_post = params["post"].merge(:created_at => Time.now)
+    new_post = {}
+    new_post[:whotheyare] = Dryopteris.whitewash params['post']['whotheyare']
+    new_post[:howtheyknowhim] = Dryopteris.whitewash params['post']['howtheyknowhim']
+    new_post[:created_at] = Time.now
     DB[:posts] << new_post
-    flash[:saved_for] = new_post['whotheyare']
+    flash[:saved_for] = new_post[:whotheyare]
     redirect '/'
   end
 

@@ -1,4 +1,6 @@
-%form{:action => '/posts/create', :method => 'post', :id => 'new_post'}
+- hsh = {:action => '/posts/create', :method => 'post', :id => 'new_post'}
+- hsh[:style] = 'display:none' if hidden
+%form{hsh}
   %label{:for => "whotheyare"} Who are you?
   %input{:name => "post[whotheyare]", :type => "text", :id => "whotheyare"}
 
