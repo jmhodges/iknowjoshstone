@@ -2,7 +2,7 @@ xml.instruct!
 
 xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
 
-  xml.title   "Feed Name"
+  xml.title   "I Know Josh Stone"
   xml.link    "rel" => "self", "href" => 'http://iknowjoshstone.com/feed'
   xml.link    "rel" => "alternate", "href" => 'http://iknowjoshstone.com/'
   xml.id      'http://iknowjoshstone.com/'
