@@ -12,10 +12,10 @@
 = haml :form, :layout => false, :locals => {:hidden => true}
 
 - @posts.each do |post|
-  %div.post
-    %div.post-whotheyare
+  .post
+    .post-whotheyare
       %strong.whotheyare
         = post[:whotheyare]
       knows Josh:
-    %div.howtheyknowhim
+    .howtheyknowhim
       = post[:howtheyknowhim]
