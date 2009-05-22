@@ -13,9 +13,14 @@ class Iknowjoshstone < Sinatra::Base
   enable :sessions
 
   configure do
-    dbfile = here("../db/#{environment}.sqlite3")
-    FileUtils.touch(dbfile)
-    DB = Sequel.sqlite(dbfile)
+    if environment.to_s != 'production'
+      dbfile = here("../db/#{environment}.sqlite3")
+      FileUtils.touch(dbfile)
+      DB = Sequel.sqlite(dbfile)
+    else
+      # Yeah, fuck you, like I need a password on this db.
+      DB = Sequel.connect('mysql://iknowjoshstone@localhost/iknowjoshstone')
+    end
     unless DB.table_exists?(:posts)
       DB.create_table(:posts) do
         primary_key :id
