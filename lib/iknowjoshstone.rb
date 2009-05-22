@@ -14,6 +14,7 @@ class Iknowjoshstone < Sinatra::Base
 
   configure do
     dbfile = here("../db/#{environment}.sqlite3")
+    FileUtils.touch(dbfile)
     DB = Sequel.sqlite(dbfile)
     unless DB.table_exists?(:posts)
       DB.create_table(:posts) do
