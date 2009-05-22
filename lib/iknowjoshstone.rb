@@ -43,10 +43,11 @@ class Iknowjoshstone < Sinatra::Base
   end
 
   get '/feed' do
+    content_type 'application/atom+xml'
     @posts = DB[:posts].order(:created_at.desc).limit(10)
     builder :feed
   end
-  
+
   post '/posts/create' do
     new_post = {}
     new_post[:whotheyare] = Dryopteris.whitewash params['post']['whotheyare']
