@@ -1,21 +1,26 @@
-- if @saved_for
-  %div.saved
-    = "You really know Josh, hunh, <strong>#{@saved_for}</strong>?"
 
+.main
+  .clear
+  .g320
+    %h1 I Know Josh Stone
 
-%h1 I Know Josh Stone
+    %h3
+      %a#form_link{:href => '/posts/new'}
+        Do you know Josh Stone?
 
-%h3
-  %a#form_link{:href => '/posts/new'}
-    Do you know Josh Stone?
+    = haml :form, :layout => false, :locals => {:hidden => true}
+    
+    - if @saved_for
+      .saved
+        = "You really know Josh, hunh, <strong>#{@saved_for}</strong>?"
 
-= haml :form, :layout => false, :locals => {:hidden => true}
+    = haml :post, :layout => false, :locals => {:post => @posts[0]}
 
-- @posts.each do |post|
-  .post
-    .post-whotheyare
-      %strong.whotheyare
-        = post[:whotheyare]
-      knows Josh:
-    .howtheyknowhim
-      = post[:howtheyknowhim]
+  .g640
+    %img{:src => '/images/surprised_josh.jpg'}
+
+  - @posts[1..-1].each_slice(4) do |ps|
+    - ps.each do |post|
+      = haml :post, :layout => false, :locals => {:post => post}
+     
+    .clear

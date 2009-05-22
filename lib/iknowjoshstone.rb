@@ -39,7 +39,7 @@ class Iknowjoshstone < Sinatra::Base
   
   get '/' do
     @saved_for = flash[:saved_for]
-    @posts = DB[:posts].order(:created_at.desc).limit(10)
+    @posts = DB[:posts].order(:created_at.desc).limit(10).to_a
     flash_haml :index
   end
 
