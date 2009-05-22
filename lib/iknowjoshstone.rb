@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sequel'
 require 'haml'
 require 'dryopteris'
+require 'builder'
 
 def here(fname)
   File.expand_path(File.dirname(__FILE__) + '/' + fname)
