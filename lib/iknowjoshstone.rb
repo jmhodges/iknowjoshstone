@@ -32,6 +32,11 @@ class Iknowjoshstone < Sinatra::Base
     end
   end
 
+  before do
+    content_type 'text/html', :charset => 'utf-8'
+  end
+  
+  
   get '/' do
     @saved_for = flash[:saved_for]
     @posts = DB[:posts].order(:created_at.desc).limit(10)
@@ -43,7 +48,7 @@ class Iknowjoshstone < Sinatra::Base
   end
 
   get '/feed' do
-    content_type 'application/atom+xml'
+    content_type 'application/atom+xml', :charset => 'utf-8'
     @posts = DB[:posts].order(:created_at.desc).limit(10)
     builder :feed
   end
