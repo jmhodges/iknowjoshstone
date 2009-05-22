@@ -1,10 +1,11 @@
-
 .main
   .clear
+    &nbsp;
+
   .g320
     %h1 I Know Josh Stone
-
-    %h3
+    
+    %h4
       %a#form_link{:href => '/posts/new'}
         Do you know Josh Stone?
 
@@ -12,15 +13,32 @@
     
     - if @saved_for
       .saved
-        = "You really know Josh, hunh, <strong>#{@saved_for}</strong>?"
-
+        You really know Josh, hunh,
+        = succeed '?' do
+          %strong @saved_for
+    
     = haml :post, :layout => false, :locals => {:post => @posts[0]}
 
   .g640
     %img{:src => '/images/surprised_josh.jpg'}
+  .clear
+    &nbsp;
 
   - @posts[1..-1].each_slice(4) do |ps|
     - ps.each do |post|
       = haml :post, :layout => false, :locals => {:post => post}
      
     .clear
+      &nbsp;
+
+  .g960
+    %p.note
+      Created by
+      = succeed ',' do
+        %a{:href => 'http://somethingsimilar.com/about'} Jeff Hodges
+      and thought up by
+      = succeed '.' do
+        %a{:href => 'http://melanie-lee.com/'} Melanie Lee
+
+  .clear
+    &nbsp;

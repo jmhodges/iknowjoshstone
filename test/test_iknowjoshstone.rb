@@ -27,8 +27,8 @@ class TestIknowjoshstone < Test::Unit::TestCase
     assert_equal "jeff", posts[0].at('.whotheyare').content.strip
     assert_equal "melanie", posts[1].at('.whotheyare').content.strip
 
-    assert_equal "from passa passa reggae, via melanie", posts[0].at('div.howtheyknowhim').content.strip
-    assert_equal "in short, from being fantastic", posts[1].at('div.howtheyknowhim').content.strip
+    assert_equal "from passa passa reggae, via melanie", posts[0].at('p.howtheyknowhim').content.strip
+    assert_equal "in short, from being fantastic", posts[1].at('p.howtheyknowhim').content.strip
   end
 
   def test_index_links_to_a_form_for_adding_a_post
@@ -50,13 +50,14 @@ class TestIknowjoshstone < Test::Unit::TestCase
 
   def test_index_to_new_post
     assert_equal [], Iknowjoshstone::DB[:posts].filter(:whotheyare => "megan").all
-    
+
     visit '/'
     click_link 'Do you know Josh Stone?'
     fill_in 'whotheyare', :with => "megan"
     fill_in 'howtheyknowhim', :with => 'not sure but i remember beats and mel'
     submit_form 'new_post'
     assert response.ok?, "posted just fine"
+    
     posts = Iknowjoshstone::DB[:posts].filter(:whotheyare => "megan").all
     assert_equal 1, posts.size
 
@@ -76,8 +77,28 @@ class TestIknowjoshstone < Test::Unit::TestCase
     submit_form 'new_post'
     visit '/'
     assert_nil parsed.at('p[@style="display:none"]')
+
+    visit '/posts/new'
+    fill_in 'whotheyare', :with => '<p>goodguy</p>'
+    fill_in 'howtheyknowhim', :with => '<p>this is fine</p>'
+    assert_not_nil parsed.at('p')
+    assert_not_nil parsed.at('p').at('p')
   end
 
+  def test_form_validation
+    flunk "check for empty values"
+    flunk "max name length?"
+    flunk "max how size maybe with js to show how many chars left"
+  end
+
+  def test_image_size
+    flunk "need a bigger image to shrink down to 630 x 4xx"
+  end
+
+  def test_post_permalinks
+    flunk "need a url to read just one post and to provide links to it"
+  end
+  
   private
   def parsed
     Nokogiri::HTML.parse(response_body)
