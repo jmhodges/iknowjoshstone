@@ -6,16 +6,16 @@
 %h1 I Know Josh Stone
 
 %h3
-  %a{:href => '/posts/new', :id => 'form_link'}
+  %a#form_link{:href => '/posts/new'}
     Do you know Josh Stone?
 
 = haml :form, :layout => false, :locals => {:hidden => true}
 
 - @posts.each do |post|
-  %div{:class => 'post'}
-    %div{:class => 'post-whotheyare'}
-      %strong{:class => 'whotheyare'}
+  %div.post
+    %div.post-whotheyare
+      %strong.whotheyare
         = post[:whotheyare]
       knows Josh:
-    %div{:class => 'howtheyknowhim'}
+    %div.howtheyknowhim
       = post[:howtheyknowhim]

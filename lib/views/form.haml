@@ -1,13 +1,13 @@
-- hsh = {:action => '/posts/create', :method => 'post', :id => 'new_post'}
+- hsh = {:action => '/posts/create', :method => 'post'}
 - hsh[:style] = 'display:none' if hidden
-%form{hsh}
+%form#new_post{hsh}
   %label{:for => "whotheyare"} Who are you?
-  %input{:name => "post[whotheyare]", :type => "text", :id => "whotheyare"}
+  %input#whotheyare{:name => "post[whotheyare]", :type => "text"}
 
   %br/
 
   %label{:for => "howtheyknowhim"} How do you know him?
-  %textarea{:name => "post[howtheyknowhim]", :id => "howtheyknowhim", :cols => 45, :rows => 4}
+  %textarea#howtheyknowhim{:name => "post[howtheyknowhim]", :cols => 45, :rows => 4}
 
   %br/
 
